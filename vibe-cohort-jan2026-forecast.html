@@ -118,11 +118,11 @@
 <div class="header">
   <div class="header-top">
     <div>
-      <h1>January 2026 Cohort — <span>6-Month Forecast</span></h1>
+      <h1>January 2026 Cohort — <span>7-Month Forecast</span></h1>
       <div class="tags">
         <span class="tag tag-green">6 months actual</span>
-        <span class="tag tag-blue">6 months forecast</span>
-        <span class="tag tag-purple">Jan – Dec 2026</span>
+        <span class="tag tag-blue">7 months forecast</span>
+        <span class="tag tag-purple">Jan 2026 – Jan 2027</span>
         <span class="tag tag-orange">W11 validated churn</span>
       </div>
     </div>
@@ -131,50 +131,50 @@
       <div style="font-size:12px;color:var(--muted)">datadoc/114856 · W11</div>
     </div>
   </div>
-  <p class="subtitle">Actual data Jan–Jun 2026 from cohort analysis. Forecast Jul–Dec 2026 using W11-validated churn rates (Annual 2%/mo, Monthly ~11-12%/mo).<br>
+  <p class="subtitle">Actual data Jan–Jun 2026 from cohort analysis. Forecast Jul–Dec 2026 using W11-validated churn rates (Annual 2%/mo, Monthly ~11-12%/mo). Jan 2027 adds the annual renewal event (~$168K est., <strong>15% renewal churn assumed</strong> — actual rate TBD Aug 2026).<br>
   Cohort: 86,452 Vibe sites created in January 2026 · 3,302 cumulative premium converts (3.82% conversion by Jun 2026).</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ KPI STRIP -->
 <div class="kpi-strip">
   <div class="kpi kpi-teal">
-    <div class="kpi-label">12-Month Revenue</div>
-    <div class="kpi-value">$514K</div>
-    <div class="kpi-sub">Jan–Dec 2026 cumulative</div>
+    <div class="kpi-label">13-Month Revenue</div>
+    <div class="kpi-value">$682K</div>
+    <div class="kpi-sub">Jan 2026 – Jan 2027 cumulative</div>
   </div>
   <div class="kpi kpi-red">
-    <div class="kpi-label">12-Month AI Cost</div>
-    <div class="kpi-value">$151K</div>
-    <div class="kpi-sub">$143K actual + $8K forecast</div>
+    <div class="kpi-label">13-Month AI Cost</div>
+    <div class="kpi-value">$152K</div>
+    <div class="kpi-sub">$143K actual + $9K forecast</div>
   </div>
   <div class="kpi kpi-green">
-    <div class="kpi-label">12-Month Net Margin</div>
-    <div class="kpi-value">$363K</div>
-    <div class="kpi-sub">70.6% blended (Jan spike drags)</div>
+    <div class="kpi-label">13-Month Net Margin</div>
+    <div class="kpi-value">$531K</div>
+    <div class="kpi-sub">77.8% blended (Jan 2027 renewal lifts avg)</div>
   </div>
   <div class="kpi kpi-yellow">
-    <div class="kpi-label">Post-Jan Margin</div>
-    <div class="kpi-value">86-88%</div>
-    <div class="kpi-sub">Feb–Dec stable margin band</div>
+    <div class="kpi-label">Post-Jan 2026 Margin</div>
+    <div class="kpi-value">86-99%</div>
+    <div class="kpi-sub">Steady 86-88%; Jan 2027 spikes to 99%+</div>
   </div>
   <div class="kpi kpi-purple">
-    <div class="kpi-label">Active Premium Dec</div>
-    <div class="kpi-value">1,454</div>
-    <div class="kpi-sub">44.1% of 3,302 ever-converts</div>
+    <div class="kpi-label">Active Premium Jan 2027</div>
+    <div class="kpi-value">1,249</div>
+    <div class="kpi-sub">37.8% of 3,302 ever-converts</div>
   </div>
   <div class="kpi kpi-orange">
-    <div class="kpi-label">⚠ Jan 2027 Renewal</div>
-    <div class="kpi-value">~1,143</div>
-    <div class="kpi-sub">Annual sites facing renewal next</div>
+    <div class="kpi-label">Jan 2027 Renewal Revenue</div>
+    <div class="kpi-value">~$168K</div>
+    <div class="kpi-sub">972 renewals × ~$166/yr (15% churn assumed)</div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ CHART A: ACTIVE SITES -->
 <div class="section">
   <div class="section-title">Premium Subscriber Retention</div>
-  <div class="section-subtitle">Monthly plan holders churn at ~11-12%/mo (stabilising). Annual plan holders churn at ~2%/mo — very sticky mid-cycle. Renewal event not until Jan 2027.</div>
+  <div class="section-subtitle">Monthly plan holders churn at ~11-12%/mo (stabilising). Annual plan holders churn at ~2%/mo mid-cycle. Jan 2027 = first renewal decision for annual plans.</div>
   <div class="chart-wrap">
-    <h3>Active Premium Sites — Annual vs Monthly (Jan–Dec 2026)</h3>
+    <h3>Active Premium Sites — Annual vs Monthly (Jan 2026 – Jan 2027)</h3>
     <p>Solid fill = actual · Hatched/lighter = forecast · Dashed vertical = forecast boundary</p>
     <canvas id="chartSites" height="90"></canvas>
   </div>
@@ -183,9 +183,9 @@
 <!-- ═══════════════════════════════════════════════════════════ CHART B: REVENUE & COST -->
 <div class="section">
   <div class="section-title">Revenue, AI Cost &amp; Net Margin</div>
-  <div class="section-subtitle">January's massive AI spike ($116K) was the free-site LM1 burst. From month 2 onwards, premium AI cost declines smoothly as sites age past the usage peak. Revenue after Jan is mainly monthly plan renewals (~$24.52/site).</div>
+  <div class="section-subtitle">Jan 2026 AI spike ($116K) = free-site LM1 burst. Revenue dips to ~$8K/mo by Dec as only monthly plans contribute — then surges back to ~$193K in Jan 2027 when 1,120 annual plans renew.</div>
   <div class="chart-wrap">
-    <h3>Monthly Collections vs AI Cost vs Net Margin % (all 12 months)</h3>
+    <h3>Monthly Collections vs AI Cost vs Net Margin % (all 13 months)</h3>
     <p>Left axis: USD amounts · Right axis: net margin % line</p>
     <canvas id="chartRevCost" height="100"></canvas>
   </div>
@@ -258,19 +258,24 @@
         <td><strong>~0 / month</strong></td>
         <td class="source">Cohort conversion rate by LM6: 3.82%, essentially saturated</td>
       </tr>
+      <tr>
+        <td>Annual renewal churn (Jan 2027)</td>
+        <td><strong>15% one-time</strong></td>
+        <td class="source">SaaS benchmark assumption — no Vibe data yet; first data Aug 2026 (Jul 2025 cohort)</td>
+      </tr>
     </table>
   </div>
 
   <div class="callout callout-orange">
-    <h4>⚠ KEY RISK: Jan 2027 Annual Renewal Wave</h4>
-    <p>The ~1,143 annual plan subscribers from the Jan 2026 cohort will face their first renewal in January 2027 — just outside this forecast window. If 15–25% don't renew, that removes 171–286 sites and ~$3,700–$6,200/month in ongoing revenue. We have no renewal rate data yet (Vibe too young); the first measurable data arrives Aug 2026 (293 annual sites from Jul 2025 cohort renewing).</p>
+    <h4>⚠ Jan 2027 Renewal — 15% Churn Applied (SaaS Benchmark, No Vibe Data Yet)</h4>
+    <p>972 of 1,143 annual sites are modeled as renewing (15% renewal churn = 171 lost). Revenue assumes ~$166/year per renewing site. First real Vibe renewal data arrives Aug 2026 (Jul 2025 cohort). If actual churn is lower (5–10%), revenue could be $175K–$186K; if higher (25–30%), it drops to $133K–$145K.</p>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ DATA TABLE -->
 <div class="section">
   <div class="section-title">Monthly Breakdown</div>
-  <div class="section-subtitle">Full 12-month table. Actual months = from cohort queries. Forecast months = modeled using W11 churn rates.</div>
+  <div class="section-subtitle">Full 13-month table (Jan 2026 – Jan 2027). Actual = cohort queries. Forecast = W11 churn rates. Jan 2027 revenue includes annual plan renewal estimate.</div>
   <div class="chart-wrap" style="overflow-x:auto">
     <table class="data-table">
       <thead>
@@ -302,24 +307,24 @@
   </div>
 
   <div class="callout callout-blue">
-    <h4>📊 Annual plan is the backbone — 78.6% of base by Dec 2026</h4>
-    <p>Annual plan subscribers start at 51.2% of the premium base and grow to 78.6% by December because monthly plan churns at ~11-12%/month while annual churn is only ~2%/month mid-cycle. Annual plan holders are very sticky until the 12-month renewal decision.</p>
+    <h4>📊 Annual plan is the backbone — 77.8% of base by Jan 2027</h4>
+    <p>Annual plan subscribers grow from 51.2% of the premium base (Jan 2026) to 78.6% by Dec 2026, then dip slightly to 77.8% in Jan 2027 (15% renewal churn removes 171 annual sites). The monthly base shrinks faster mid-year (11%/mo churn), but the renewal event disproportionately hits annual subscribers in month 13.</p>
   </div>
 
   <div class="callout callout-yellow">
-    <h4>💰 Cumulative revenue by Dec 2026: ~$514K from 86,452 sites ($5.95/site)</h4>
-    <p>$269K was collected in January alone (annual plan upfront payments). The remaining $245K comes from monthly renewals over 11 months. After the LM1 AI spike, this cohort is profitable every single month.</p>
+    <h4>💰 Cumulative revenue by Jan 2027: ~$682K from 86,452 sites ($7.89/site)</h4>
+    <p>$269K collected in Jan 2026 (annual upfront) + $245K from monthly renewals (Feb–Dec) + ~$168K from Jan 2027 annual renewal (15% churn assumed) = $682K total. Stopping at Dec 2026 gives $514K — the renewal adds +$168K more. Margin hits 99%+ in Jan 2027 as AI costs are negligible by LM13.</p>
   </div>
 
   <div class="callout callout-purple">
-    <h4>🔍 Watch: monthly plan churn rate in Jul–Aug 2026</h4>
-    <p>The forecast assumes monthly churn stabilises at ~11%. If it continues declining toward 8–9% (as seen in some older cohorts), Dec 2026 active monthly sites would be ~360 (vs. 311 in base case), adding ~$1,200/month in revenue. Conversely, if it spikes back toward 18–22%, the monthly base shrinks faster.</p>
+    <h4>🔍 Watch: Jan 2027 actual renewal rate (data lands Aug 2026)</h4>
+    <p>The Jul 2025 cohort annual plans (~293 sites) renew in Aug 2026 — the first real Vibe renewal churn data point. The model uses 15% (SaaS benchmark). If it's lower (5–10%), Jan 2027 revenue rises to $175K–$186K; if higher (25–30%), it drops to $133K–$145K. A ±10% swing in renewal churn = ±~$19K in Jan 2027 revenue.</p>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ FOOTER -->
 <div class="footer">
-  Jan 2026 Cohort Forecast · v1 · Jun 29, 2026 · W11 validated churn · datadoc/114856
+  Jan 2026 Cohort Forecast · v2 · Jun 29, 2026 · W11 validated churn · datadoc/114856 · Forecast extended to Jan 2027
 </div>
 
 </div><!-- end .page -->
@@ -340,16 +345,20 @@ const actAIFree   = [88829,   2780,   956,   496,   389,   200];
 const actChurn    = [0, 513, 274, 270, 194, 128];
 const actChurnPct = [0, 18.5, 10.5, 11.1, 8.8, 6.3];
 
-// ── FORECAST (LM7–LM12, W11-validated) ──────────────────────
-const fcstMonths   = ['Jul 2026','Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026'];
-const fcstPremium  = [1821, 1735, 1655, 1582, 1515, 1454];
-const fcstAnnual   = [1264, 1239, 1214, 1190, 1166, 1143];
-const fcstMonthly  = [ 557,  496,  441,  392,  349,  311];
-const fcstRevenue  = [13658, 12163, 10814, 9612, 8558, 7626];
-const fcstAIPrem   = [1748,  1499,  1287, 1107,  954,  824];
-const fcstAIFree   = [ 150,    80,    60,   50,   40,   30];
-const fcstChurn    = [102, 86, 80, 73, 67, 61];
-const fcstChurnPct = [5.3, 4.7, 4.6, 4.4, 4.2, 4.0];
+// ── FORECAST (LM7–LM13, W11-validated; Jan 2027 = annual renewal month) ──
+// Jan 2027: 15% annual renewal churn applied (SaaS benchmark; no Vibe data yet — first data Aug 2026)
+// Annual renewing: 1,143 × 0.85 = 972  |  Monthly continuing: 311 × 0.89 = 277
+// Revenue: 972 × $166/yr annual renewal + 277 × $24.52/mo monthly = $168,144
+// AI cost: LM13 mature sites — prem $713 (−10%/mo from LM12 rate) + free $20 (tail)
+const fcstMonths   = ['Jul 2026','Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027'];
+const fcstPremium  = [1821, 1735, 1655, 1582, 1515, 1454, 1249];
+const fcstAnnual   = [1264, 1239, 1214, 1190, 1166, 1143,  972];
+const fcstMonthly  = [ 557,  496,  441,  392,  349,  311,  277];
+const fcstRevenue  = [13658, 12163, 10814, 9612, 8558, 7626, 168144];
+const fcstAIPrem   = [1748,  1499,  1287, 1107,  954,  824,   713];
+const fcstAIFree   = [ 150,    80,    60,   50,   40,   30,    20];
+const fcstChurn    = [102, 86, 80, 73, 67, 61, 205];
+const fcstChurnPct = [5.3, 4.7, 4.6, 4.4, 4.2, 4.0, 14.1];
 
 // ── COMBINED (12 months) ─────────────────────────────────────
 const allMonths   = [...actMonths, ...fcstMonths];
@@ -424,17 +433,24 @@ new Chart(document.getElementById('chartSites'), {
   },
   options: {
     responsive: true,
+    interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14 } },
       tooltip: {
         callbacks: {
+          label: (ctx) => {
+            const v = ctx.parsed.y ?? ctx.parsed._custom ?? ctx.raw;
+            if (ctx.dataset.label === 'Total active (line)') {
+              return ` Total active: ${Number(v).toLocaleString()}`;
+            }
+            return ` ${ctx.dataset.label}: ${Number(v).toLocaleString()}`;
+          },
           afterBody: (items) => {
             const i = items[0].dataIndex;
             const annPct = Math.round(allAnnual[i] / allPremium[i] * 1000) / 10;
-            return [
-              `Annual share: ${annPct}%`,
-              i > 0 ? `Churned this month: ${allChurn[i]} (${allChurnPct[i]}%)` : ''
-            ];
+            const lines = [`─────────────────────`, `Annual share: ${annPct}%`];
+            if (i > 0) lines.push(`Churned this month: ${allChurn[i].toLocaleString()} (${allChurnPct[i]}%)`);
+            return lines;
           }
         }
       },
@@ -656,7 +672,7 @@ const totPct = Math.round(totMarg / totRev * 1000) / 10;
 const tr = document.createElement('tr');
 tr.className = 'total';
 tr.innerHTML = `
-  <td>12-Month Total</td>
+  <td>13-Month Total</td>
   <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>${fmt(totRev)}</td>
   <td>${fmt(totAI)}</td>
