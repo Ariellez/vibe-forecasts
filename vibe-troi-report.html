@@ -245,24 +245,6 @@
 
   <!-- ══ KPI STRIP ═════════════════════════════════════════════════════════ -->
   <section>
-    <div class="kpi-grid">
-      <div class="kpi green">
-        <div class="kpi-value">$2.30M</div>
-        <div class="kpi-label">12-month projected revenue (incl. renewal waves)</div>
-      </div>
-      <div class="kpi red">
-        <div class="kpi-value">$428K</div>
-        <div class="kpi-label">12-month projected AI cost</div>
-      </div>
-      <div class="kpi green">
-        <div class="kpi-value">$1.87M</div>
-        <div class="kpi-label">12-month net margin (rev – AI cost)</div>
-      </div>
-      <div class="kpi blue">
-        <div class="kpi-value">81.4%</div>
-        <div class="kpi-label">Average net margin %</div>
-      </div>
-    </div>
     <div class="kpi-grid-2">
       <div class="kpi">
         <div class="kpi-value">~556K</div>
@@ -305,7 +287,7 @@
 
     <div class="chart-wrap">
       <div class="chart-title">Monthly Revenue vs AI Cost vs Net Margin — Jul 2026 to Jun 2027</div>
-      <div class="chart-sub">Revenue split: GPV (light green) + Renewal wave (dark green) · AI Cost (red) · Net Margin (blue). Renewal waves grow Jul–Jan then collapse in Apr–Jun 2027.</div>
+      <div class="chart-sub">Revenue (green) · AI Cost (red) · Net Margin (blue). Revenue spikes reflect annual plan renewal waves — largest cohorts renew Nov–Jan, smallest in Apr–Jun 2027.</div>
       <canvas id="chartForward" height="110"></canvas>
       <div class="chart-source">Source: datadoc/111027 cell 697721 (v8 model) · datadoc/114856 W5 (free AI spike+tail) · W9 cell 725342 (premium AI LM rates)</div>
     </div>
@@ -689,8 +671,7 @@ new Chart(document.getElementById('chartForward'), {
   data: {
     labels: months,
     datasets: [
-      { label: 'GPV Revenue',     data: revGPV,     backgroundColor: 'rgba(63,207,142,0.55)', stack: 'rev', order: 2 },
-      { label: 'Renewal Revenue', data: revRenewal, backgroundColor: 'rgba(63,207,142,0.9)',  stack: 'rev', order: 2 },
+      { label: 'Revenue',         data: revenue,    backgroundColor: 'rgba(63,207,142,0.7)',  order: 2 },
       { label: 'AI Cost',         data: costTotal,  backgroundColor: 'rgba(242,87,87,0.7)',   order: 2 },
       { label: 'Net Margin',      data: margin,     type: 'line', borderColor: '#5b8df6',
         backgroundColor: 'rgba(91,141,246,0.1)', fill: false, tension: 0.3, pointRadius: 3,
@@ -724,8 +705,8 @@ new Chart(document.getElementById('chartForward'), {
       }
     },
     scales: {
-      x: { stacked: true, grid: { color: gridColor() } },
-      y: { stacked: false, grid: { color: gridColor() }, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } }
+      x: { grid: { color: gridColor() } },
+      y: { grid: { color: gridColor() }, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } }
     }
   }
 });
