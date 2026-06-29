@@ -229,7 +229,7 @@
   <!-- ══ PAGE HEADER ═══════════════════════════════════════════════════════ -->
   <div class="page-header">
     <div style="margin-bottom:10px">
-      <span class="tag">REVENUE MODEL v9</span>
+      <span class="tag">REVENUE MODEL v10</span>
       <span class="tag">10K DAILY BASELINE</span>
       <span class="tag">-3%/mo FROM JULY</span>
       <span class="tag">TWO-PHASE CHURN</span>
@@ -254,12 +254,8 @@
         <div class="kpi-value">10,140</div>
         <div class="kpi-label">Starting premium sites (BOM Jul 2026)</div>
       </div>
-      <div class="kpi orange">
-        <div class="kpi-value">$1.30M renewal waves</div>
-        <div class="kpi-label">Annual plan renewals — 56.7% of total 12-month revenue. Spikes Nov–Jan, drops Apr–Jun 2027.</div>
-      </div>
       <div class="kpi">
-        <div class="kpi-value">~$156K/mo avg</div>
+        <div class="kpi-value">~$87K/mo avg</div>
         <div class="kpi-label">Avg monthly net margin per forecast month</div>
       </div>
     </div>
@@ -605,8 +601,9 @@
           <tr><td>Active annual sites (BOM Jul 2026)</td><td class="num mono">6,955</td><td>Q_FA — cell 697714</td><td>Jan–May 2026 avg active annual premium sites</td></tr>
           <tr><td>Active monthly sites (BOM Jul 2026)</td><td class="num mono">3,185</td><td>Q_FA — cell 697714</td><td>Jan–May 2026 avg active monthly premium sites</td></tr>
           <tr><td>Rev per annual site/month (GPV only)</td><td class="num mono">$7.93</td><td>Q_FA derived (v9)</td><td>$21.76 total (Q_FA) − $13.83 amortized subscription ($166 ÷ 12). Annual sites contribute GPV only in non-renewal months.</td></tr>
-          <tr><td>Annual plan subscription price</td><td class="num mono">$166/year</td><td>Business assumption</td><td>Lump-sum recognized in the cohort's 12-month renewal month. Previously was amortized as $13.83/month.</td></tr>
-          <tr><td>Annual renewal churn</td><td class="num mono">15%</td><td>User assumption (v9)</td><td>Applied at the 12-month renewal date for each cohort. 85% of surviving annual sites renew.</td></tr>
+          <tr><td>Annual plan subscription price</td><td class="num mono">$114.71</td><td>Q9 — actual avg CHARGE (5,745 sites)</td><td>Measured from sandbox.ariellez.financial_transactions_vibe_sites. Avg CHARGE for Yearly plan sites Jul 2025+. Median $103.54. Confirmed by Jan 2026: $313K / 2,684 sites = $116.71/site. Replaces $166 business assumption.</td></tr>
+          <tr><td>Ongoing GPV per annual site/month</td><td class="num mono">$0.66</td><td>Q9 — actual GPV take (189 sites)</td><td>Only 189 of 9,806 Yearly plan sites have any GPV activity. Avg $34.26 for those; spread across all = $0.66/site/month. Replaces $7.93 derived estimate.</td></tr>
+          <tr><td>Annual renewal churn</td><td class="num mono">15%</td><td>User assumption (v9, unchanged)</td><td>Applied at the 12-month renewal date for each cohort. 85% of surviving annual sites renew. No actual renewal data exists yet — first renewals happening Jul 2026.</td></tr>
           <tr><td>Annual mid-cycle survival (months 2–12)</td><td class="num mono">71.3%</td><td>W11 validated (2%/mo)</td><td>M1 churn 10.9% → 89.1% survive M1. Then 2%/mo for 11 months (W11 Jan 2026 cohort: 1,422→1,143 actual) = 0.98^11 = 80.0%. Overall: 0.891 × 0.800 = 71.3%.</td></tr>
           <tr><td>Rev per monthly site/month</td><td class="num mono">$20.38</td><td>Q_FA — cell 697714</td><td>Net collections + GPV (2.9% take) / active monthly site, Jan–May 2026 avg</td></tr>
           <tr><td>June 2026 new sites baseline</td><td class="num mono">10,000</td><td>W7 — datadoc/114856 cell 720680</td><td>Daily data Jun 1–25: post-cliff avg (Jun 3–25) ≈ 370/day → ~10K/month run rate. Jun 3 was cliff day (-57% overnight from Jun 2).</td></tr>
@@ -632,25 +629,26 @@
   </section>
 
   <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:20px">
-    Wix Vibe TROI Analysis · datadoc/111706 · Revenue model v9 (10K daily baseline, two-phase churn + spike+tail AI + renewal waves 15% churn, W5+W7+W9+W11 validated) · Updated 2026-06-29
+    Wix Vibe TROI Analysis · datadoc/111706 · Revenue model v10 (10K daily baseline, two-phase churn + spike+tail AI + renewal waves, Q9 data-validated pricing $114.71, W5+W7+W9+W11) · Updated 2026-06-29
   </div>
 
 </div>
 
 <script>
 // ── Data (v9 — Renewal Wave model, 2026-06-29) ────────────────────────────
-// Revenue model: Python Q_forecast_12month_revenue_model.py v9
-// Key change: annual plan revenue split into GPV ($7.93/site/mo) + lump-sum renewal at month 12.
-// 15% renewal churn applied at each cohort's 12-month anniversary.
-// Survival to renewal: M1 churn 10.9%, then 2%/mo (W11-validated) for months 2–11 = 71.3% overall.
-// Result: revenue is flat Jul–Jan ($212–$237K) then drops in Apr–Jun 2027 when post-traffic-cliff
-// cohorts (Apr–Jun 2026, only 332–1,382 converts) renew — exposing the true cash-flow cliff.
+// Revenue model: Python Q_forecast_12month_revenue_model.py v10 — Data-validated pricing
+// Key changes from v9 (Q9 query results, 2026-06-29):
+//   1. Annual plan price: $166 → $114.71 (Q9 actual avg CHARGE; confirmed $116.71/site Jan 2026)
+//   2. Ongoing GPV per annual site/month: $7.93 → $0.66 (Q9: only 189/9,806 Yearly sites have GPV)
+//   3. Day-0 new annual converts: pay $114.71 upfront (was $21.76 amortized estimate)
+//   4. Renewal churn: 15% (unchanged); survival to renewal: 71.3% (W11, unchanged)
+// Result: 12-month revenue $1.48M (vs $2.30M in v9); avg margin 71% (vs 81% in v9)
 const months     = ["Jul '26","Aug '26","Sep '26","Oct '26","Nov '26","Dec '26","Jan '27","Feb '27","Mar '27","Apr '27","May '27","Jun '27"];
 const newSites   = [9700,9409,9127,8853,8587,8330,8080,7837,7602,7374,7153,6938];
 const activeBOM  = [10140,9467,8847,8301,7816,7384,6995,6645,6326,6034,5766,5519];
-const revenue    = [214630,213025,212481,213316,224259,227191,237223,212892,199906,132938,135916,75150];
-// Renewal wave: lump-sum $166 × renewing sites (15% churn applied at renewal)
-const revRenewal = [91300,100430,109560,118690,136784,145914,161352,141764,132966,69720,76028,18260];
+const revenue    = [143703,140837,139031,138536,145318,146797,153371,136349,127285,81013,83149,41295];
+// Renewal wave: lump-sum $114.71 × renewing sites (15% churn applied at renewal)
+const revRenewal = [63090,69400,75709,82018,94521,100830,111498,97962,91883,48178,52537,12618];
 const revGPV     = months.map((_,i) => revenue[i] - revRenewal[i]);
 const costPrem   = [22314,20897,19911,19301,18739,18271,17477,16736,16036,15411,14759,14145];
 const costFree   = [28613,25173,22555,20517,18734,17160,15805,14607,13629,12811,12232,11708];
@@ -749,8 +747,8 @@ new Chart(document.getElementById('chartMarginPct'), {
     plugins: { legend: { display: false } },
     scales: {
       x: { grid: { color: gridColor() } },
-      y: { grid: { color: gridColor() }, ticks: { callback: v => v + '%' }, min: 60, max: 90 }
-      // Range 60–90 covers 65.6% (Jun 2027, small renewal cohort) → 86.0% (Jan 2027, peak renewal)
+      y: { grid: { color: gridColor() }, ticks: { callback: v => v + '%' }, min: 30, max: 90 }
+      // Range 30–90 covers 37.4% (Jun 2027, tiny renewal cohort) → 78.3% (Jan 2027, peak renewal)
     }
   }
 });
