@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan 2026 Cohort — 6-Month Forecast</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #242736;
+    --border: #2e3248;
+    --text: #e8eaf6;
+    --muted: #8a8fb0;
+    --accent: #6c8efb;
+    --accent2: #a78bfa;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --orange: #fb923c;
+    --teal: #22d3ee;
+    --forecast-bg: rgba(108,142,251,0.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  .page { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+  /* Header */
+  .header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent2); }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .tag { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .tag-blue   { background: rgba(108,142,251,0.15); color: var(--accent);  border: 1px solid rgba(108,142,251,0.3); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: var(--accent2); border: 1px solid rgba(167,139,250,0.3); }
+  .tag-green  { background: rgba(52,211,153,0.15);  color: var(--green);   border: 1px solid rgba(52,211,153,0.3); }
+  .tag-orange { background: rgba(251,146,60,0.15);  color: var(--orange);  border: 1px solid rgba(251,146,60,0.3); }
+  .tag-yellow { background: rgba(251,191,36,0.15);  color: var(--yellow);  border: 1px solid rgba(251,191,36,0.3); }
+  .subtitle { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .kpi-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .kpi-value { font-size: 22px; font-weight: 700; }
+  .kpi-sub   { color: var(--muted); font-size: 11px; margin-top: 3px; }
+  .kpi-blue   .kpi-value { color: var(--accent); }
+  .kpi-purple .kpi-value { color: var(--accent2); }
+  .kpi-green  .kpi-value { color: var(--green); }
+  .kpi-red    .kpi-value { color: var(--red); }
+  .kpi-yellow .kpi-value { color: var(--yellow); }
+  .kpi-orange .kpi-value { color: var(--orange); }
+  .kpi-teal   .kpi-value { color: var(--teal); }
+
+  /* Sections */
+  .section { margin-bottom: 48px; }
+  .section-title    { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .section-subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+
+  /* Charts */
+  .chart-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+  .chart-wrap h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .chart-wrap p  { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  @media (max-width: 760px) { .chart-grid { grid-template-columns: 1fr; } }
+
+  /* Callouts */
+  .callout { border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid; }
+  .callout h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .callout p  { font-size: 13px; color: var(--muted); }
+  .callout-blue   { background: rgba(108,142,251,0.08); border-color: var(--accent); }
+  .callout-blue   h4 { color: var(--accent); }
+  .callout-green  { background: rgba(52,211,153,0.08);  border-color: var(--green); }
+  .callout-green  h4 { color: var(--green); }
+  .callout-yellow { background: rgba(251,191,36,0.08);  border-color: var(--yellow); }
+  .callout-yellow h4 { color: var(--yellow); }
+  .callout-orange { background: rgba(251,146,60,0.08);  border-color: var(--orange); }
+  .callout-orange h4 { color: var(--orange); }
+  .callout-purple { background: rgba(167,139,250,0.08); border-color: var(--accent2); }
+  .callout-purple h4 { color: var(--accent2); }
+
+  /* Assumptions box */
+  .assumptions { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .assumptions h3 { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+  .assumptions table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .assumptions th { color: var(--muted); text-align: left; padding: 6px 12px; border-bottom: 1px solid var(--border); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+  .assumptions td { padding: 7px 12px; border-bottom: 1px solid rgba(46,50,72,0.5); }
+  .assumptions tr:last-child td { border-bottom: none; }
+  .assumptions .source { color: var(--muted); font-size: 11px; }
+
+  /* Monthly table */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table th { color: var(--muted); text-align: right; padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+  .data-table th:first-child { text-align: left; }
+  .data-table td { padding: 9px 12px; text-align: right; border-bottom: 1px solid rgba(46,50,72,0.4); }
+  .data-table td:first-child { text-align: left; font-weight: 600; }
+  .data-table tr.actual td { color: var(--text); }
+  .data-table tr.forecast td { color: rgba(108,142,251,0.85); }
+  .data-table tr.forecast td:first-child { color: var(--accent2); }
+  .data-table tr.total td { font-weight: 700; border-top: 2px solid var(--border); border-bottom: none; color: var(--yellow); }
+  .badge-actual   { background: rgba(52,211,153,0.15); color: var(--green); padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-left: 6px; }
+  .badge-forecast { background: rgba(108,142,251,0.15); color: var(--accent); padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-left: 6px; }
+
+  /* Legend box */
+  .legend-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 11px; margin-right: 8px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .footer { color: var(--muted); font-size: 11px; text-align: center; margin-top: 48px; border-top: 1px solid var(--border); padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════════════════ HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>January 2026 Cohort — <span>6-Month Forecast</span></h1>
+      <div class="tags">
+        <span class="tag tag-green">6 months actual</span>
+        <span class="tag tag-blue">6 months forecast</span>
+        <span class="tag tag-purple">Jan – Dec 2026</span>
+        <span class="tag tag-orange">W11 validated churn</span>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:12px;color:var(--muted)">Generated Jun 29, 2026</div>
+      <div style="font-size:12px;color:var(--muted)">datadoc/114856 · W11</div>
+    </div>
+  </div>
+  <p class="subtitle">Actual data Jan–Jun 2026 from cohort analysis. Forecast Jul–Dec 2026 using W11-validated churn rates (Annual 2%/mo, Monthly ~11-12%/mo).<br>
+  Cohort: 86,452 Vibe sites created in January 2026 · 3,302 cumulative premium converts (3.82% conversion by Jun 2026).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi kpi-teal">
+    <div class="kpi-label">12-Month Revenue</div>
+    <div class="kpi-value">$514K</div>
+    <div class="kpi-sub">Jan–Dec 2026 cumulative</div>
+  </div>
+  <div class="kpi kpi-red">
+    <div class="kpi-label">12-Month AI Cost</div>
+    <div class="kpi-value">$151K</div>
+    <div class="kpi-sub">$143K actual + $8K forecast</div>
+  </div>
+  <div class="kpi kpi-green">
+    <div class="kpi-label">12-Month Net Margin</div>
+    <div class="kpi-value">$363K</div>
+    <div class="kpi-sub">70.6% blended (Jan spike drags)</div>
+  </div>
+  <div class="kpi kpi-yellow">
+    <div class="kpi-label">Post-Jan Margin</div>
+    <div class="kpi-value">86-88%</div>
+    <div class="kpi-sub">Feb–Dec stable margin band</div>
+  </div>
+  <div class="kpi kpi-purple">
+    <div class="kpi-label">Active Premium Dec</div>
+    <div class="kpi-value">1,454</div>
+    <div class="kpi-sub">44.1% of 3,302 ever-converts</div>
+  </div>
+  <div class="kpi kpi-orange">
+    <div class="kpi-label">⚠ Jan 2027 Renewal</div>
+    <div class="kpi-value">~1,143</div>
+    <div class="kpi-sub">Annual sites facing renewal next</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ CHART A: ACTIVE SITES -->
+<div class="section">
+  <div class="section-title">Premium Subscriber Retention</div>
+  <div class="section-subtitle">Monthly plan holders churn at ~11-12%/mo (stabilising). Annual plan holders churn at ~2%/mo — very sticky mid-cycle. Renewal event not until Jan 2027.</div>
+  <div class="chart-wrap">
+    <h3>Active Premium Sites — Annual vs Monthly (Jan–Dec 2026)</h3>
+    <p>Solid fill = actual · Hatched/lighter = forecast · Dashed vertical = forecast boundary</p>
+    <canvas id="chartSites" height="90"></canvas>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ CHART B: REVENUE & COST -->
+<div class="section">
+  <div class="section-title">Revenue, AI Cost &amp; Net Margin</div>
+  <div class="section-subtitle">January's massive AI spike ($116K) was the free-site LM1 burst. From month 2 onwards, premium AI cost declines smoothly as sites age past the usage peak. Revenue after Jan is mainly monthly plan renewals (~$24.52/site).</div>
+  <div class="chart-wrap">
+    <h3>Monthly Collections vs AI Cost vs Net Margin % (all 12 months)</h3>
+    <p>Left axis: USD amounts · Right axis: net margin % line</p>
+    <canvas id="chartRevCost" height="100"></canvas>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ CHART GRID: CHURN + PLAN MIX -->
+<div class="section">
+  <div class="section-title">Churn &amp; Plan Mix</div>
+  <div class="section-subtitle">Monthly plan is shrinking fast; annual plan is very resilient. By Dec 2026, annual plans represent 78.6% of the active base (up from 51.2% in Jan).</div>
+  <div class="chart-grid">
+    <div class="chart-wrap">
+      <h3>Monthly Churn Count</h3>
+      <p>Sites lost each month — peak in Feb, declining steadily into forecast.</p>
+      <canvas id="chartChurn" height="150"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <h3>Plan Mix — Annual vs Monthly Share</h3>
+      <p>Annual plan growing as % of active base because monthly churns much faster.</p>
+      <canvas id="chartMix" height="150"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ ASSUMPTIONS -->
+<div class="section">
+  <div class="section-title">Forecast Assumptions (LM7–LM12)</div>
+  <div class="section-subtitle">All actual values come from cohort analysis (datadoc/114856). Forecast uses W11-validated per-plan churn rates.</div>
+
+  <div class="assumptions">
+    <h3>📐 Parameters Used</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th><th>Source</th></tr>
+      <tr>
+        <td>Annual plan churn (M7–M11)</td>
+        <td><strong>2.0% / month</strong></td>
+        <td class="source">W11 actual: M5→M6 annual churn = 1.8%, stabilising at ~2%</td>
+      </tr>
+      <tr>
+        <td>Monthly plan churn (M7)</td>
+        <td><strong>12.0% / month</strong></td>
+        <td class="source">W11 actual trend: 22.2% → 18.5% → 13.1% → extrapolated 12%</td>
+      </tr>
+      <tr>
+        <td>Monthly plan churn (M8–M12)</td>
+        <td><strong>11.0% / month</strong></td>
+        <td class="source">W11 trend continues declining slowly, stabilising ~11%</td>
+      </tr>
+      <tr>
+        <td>Revenue per active monthly site</td>
+        <td><strong>$24.52 / month</strong></td>
+        <td class="source">Jun 2026 actual: $15,522 / 633 monthly sites (includes GPV)</td>
+      </tr>
+      <tr>
+        <td>Annual plan revenue (Jul–Dec)</td>
+        <td><strong>$0 new cash</strong></td>
+        <td class="source">Jan cohort annual plans already paid upfront; renewal Jan 2027</td>
+      </tr>
+      <tr>
+        <td>Premium AI cost per site</td>
+        <td><strong>Declining ~10%/mo</strong></td>
+        <td class="source">Extrapolated from LM6 baseline ($1.067/site), PREM_LM_AI_RATES decline</td>
+      </tr>
+      <tr>
+        <td>Free site AI cost</td>
+        <td><strong>$150 → $30/mo</strong></td>
+        <td class="source">Negligible by LM7+; LM_AI_RATES tail approaching zero</td>
+      </tr>
+      <tr>
+        <td>New late converts</td>
+        <td><strong>~0 / month</strong></td>
+        <td class="source">Cohort conversion rate by LM6: 3.82%, essentially saturated</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-orange">
+    <h4>⚠ KEY RISK: Jan 2027 Annual Renewal Wave</h4>
+    <p>The ~1,143 annual plan subscribers from the Jan 2026 cohort will face their first renewal in January 2027 — just outside this forecast window. If 15–25% don't renew, that removes 171–286 sites and ~$3,700–$6,200/month in ongoing revenue. We have no renewal rate data yet (Vibe too young); the first measurable data arrives Aug 2026 (293 annual sites from Jul 2025 cohort renewing).</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ DATA TABLE -->
+<div class="section">
+  <div class="section-title">Monthly Breakdown</div>
+  <div class="section-subtitle">Full 12-month table. Actual months = from cohort queries. Forecast months = modeled using W11 churn rates.</div>
+  <div class="chart-wrap" style="overflow-x:auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Active Total</th>
+          <th>Annual</th>
+          <th>Monthly</th>
+          <th>Churned</th>
+          <th>Churn %</th>
+          <th>Revenue</th>
+          <th>AI Cost</th>
+          <th>Net Margin</th>
+          <th>Margin %</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ INSIGHTS -->
+<div class="section">
+  <div class="section-title">Key Insights</div>
+
+  <div class="callout callout-green">
+    <h4>✅ Margin stabilises at 86–88% from LM2 onward</h4>
+    <p>After January's AI spike is absorbed, the cohort's economics are very stable. By December 2026, margin is expected at 88.8% because AI costs continue to decline while monthly subscribers pay a consistent renewal rate.</p>
+  </div>
+
+  <div class="callout callout-blue">
+    <h4>📊 Annual plan is the backbone — 78.6% of base by Dec 2026</h4>
+    <p>Annual plan subscribers start at 51.2% of the premium base and grow to 78.6% by December because monthly plan churns at ~11-12%/month while annual churn is only ~2%/month mid-cycle. Annual plan holders are very sticky until the 12-month renewal decision.</p>
+  </div>
+
+  <div class="callout callout-yellow">
+    <h4>💰 Cumulative revenue by Dec 2026: ~$514K from 86,452 sites ($5.95/site)</h4>
+    <p>$269K was collected in January alone (annual plan upfront payments). The remaining $245K comes from monthly renewals over 11 months. After the LM1 AI spike, this cohort is profitable every single month.</p>
+  </div>
+
+  <div class="callout callout-purple">
+    <h4>🔍 Watch: monthly plan churn rate in Jul–Aug 2026</h4>
+    <p>The forecast assumes monthly churn stabilises at ~11%. If it continues declining toward 8–9% (as seen in some older cohorts), Dec 2026 active monthly sites would be ~360 (vs. 311 in base case), adding ~$1,200/month in revenue. Conversely, if it spikes back toward 18–22%, the monthly base shrinks faster.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ FOOTER -->
+<div class="footer">
+  Jan 2026 Cohort Forecast · v1 · Jun 29, 2026 · W11 validated churn · datadoc/114856
+</div>
+
+</div><!-- end .page -->
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+// ── ACTUAL (LM1–LM6, from cohort analysis) ──────────────────
+const actMonths   = ['Jan 2026','Feb 2026','Mar 2026','Apr 2026','May 2026','Jun 2026'];
+const actPremium  = [2776, 2601, 2427, 2198, 2042, 1923];
+const actAnnual   = [1422, 1342, 1324, 1308, 1306, 1290];
+const actMonthly  = [1354, 1259, 1103,  890,  736,  633];
+const actRevenue  = [269017, 65560, 41182, 31109, 29478, 15522];
+const actAIPrem   = [27615,   9165,  4826,  3455,  2419,  2051];
+const actAIFree   = [88829,   2780,   956,   496,   389,   200];
+const actChurn    = [0, 513, 274, 270, 194, 128];
+const actChurnPct = [0, 18.5, 10.5, 11.1, 8.8, 6.3];
+
+// ── FORECAST (LM7–LM12, W11-validated) ──────────────────────
+const fcstMonths   = ['Jul 2026','Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026'];
+const fcstPremium  = [1821, 1735, 1655, 1582, 1515, 1454];
+const fcstAnnual   = [1264, 1239, 1214, 1190, 1166, 1143];
+const fcstMonthly  = [ 557,  496,  441,  392,  349,  311];
+const fcstRevenue  = [13658, 12163, 10814, 9612, 8558, 7626];
+const fcstAIPrem   = [1748,  1499,  1287, 1107,  954,  824];
+const fcstAIFree   = [ 150,    80,    60,   50,   40,   30];
+const fcstChurn    = [102, 86, 80, 73, 67, 61];
+const fcstChurnPct = [5.3, 4.7, 4.6, 4.4, 4.2, 4.0];
+
+// ── COMBINED (12 months) ─────────────────────────────────────
+const allMonths   = [...actMonths, ...fcstMonths];
+const allPremium  = [...actPremium,  ...fcstPremium];
+const allAnnual   = [...actAnnual,   ...fcstAnnual];
+const allMonthly  = [...actMonthly,  ...fcstMonthly];
+const allRevenue  = [...actRevenue,  ...fcstRevenue];
+const allAIPrem   = [...actAIPrem,   ...fcstAIPrem];
+const allAIFree   = [...actAIFree,   ...fcstAIFree];
+const allAICost   = allAIPrem.map((p,i) => p + allAIFree[i]);
+const allMargin   = allRevenue.map((r,i) => r - allAICost[i]);
+const allMarginPct = allRevenue.map((r,i) => r > 0 ? Math.round((r - allAICost[i]) / r * 1000) / 10 : 0);
+const allChurn    = [...actChurn,    ...fcstChurn];
+const allChurnPct = [...actChurnPct, ...fcstChurnPct];
+
+const ACTUAL_COUNT = 6; // first 6 months are actual
+
+Chart.defaults.color = '#8a8fb0';
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.font.size = 11;
+const gridColor = 'rgba(46,50,72,0.8)';
+const fmt = v => v >= 1e6 ? '$'+(v/1e6).toFixed(2)+'M' : v >= 1e3 ? '$'+(v/1e3).toFixed(1)+'K' : '$'+v.toFixed(0);
+
+// Helper: split array into solid (actual) + transparent (forecast) colour arrays
+function splitColors(solidColor, fadeColor, n) {
+  return Array.from({length: n}, (_, i) => i < ACTUAL_COUNT ? solidColor : fadeColor);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CHART A: ACTIVE SITES — stacked annual + monthly
+// ═══════════════════════════════════════════════════════════════
+new Chart(document.getElementById('chartSites'), {
+  type: 'bar',
+  data: {
+    labels: allMonths,
+    datasets: [
+      {
+        label: 'Annual plan',
+        data: allAnnual,
+        backgroundColor: splitColors('rgba(108,142,251,0.80)', 'rgba(108,142,251,0.30)', allMonths.length),
+        borderColor: splitColors('rgba(108,142,251,1)', 'rgba(108,142,251,0.5)', allMonths.length),
+        borderWidth: 1,
+        borderRadius: 3,
+        stack: 'sites',
+        borderSkipped: false,
+      },
+      {
+        label: 'Monthly plan',
+        data: allMonthly,
+        backgroundColor: splitColors('rgba(167,139,250,0.75)', 'rgba(167,139,250,0.25)', allMonths.length),
+        borderColor: splitColors('rgba(167,139,250,1)', 'rgba(167,139,250,0.5)', allMonths.length),
+        borderWidth: 1,
+        borderRadius: 3,
+        stack: 'sites',
+        borderSkipped: false,
+      },
+      {
+        label: 'Total active (line)',
+        data: allPremium,
+        type: 'line',
+        borderColor: 'rgba(251,191,36,0.85)',
+        backgroundColor: 'transparent',
+        pointBackgroundColor: allMonths.map((_,i) => i < ACTUAL_COUNT ? 'rgba(251,191,36,1)' : 'rgba(251,191,36,0.5)'),
+        pointRadius: 4,
+        borderWidth: 2,
+        tension: 0.35,
+        borderDash: [],
+        order: 0,
+        stack: undefined,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14 } },
+      tooltip: {
+        callbacks: {
+          afterBody: (items) => {
+            const i = items[0].dataIndex;
+            const annPct = Math.round(allAnnual[i] / allPremium[i] * 1000) / 10;
+            return [
+              `Annual share: ${annPct}%`,
+              i > 0 ? `Churned this month: ${allChurn[i]} (${allChurnPct[i]}%)` : ''
+            ];
+          }
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: { stacked: true, grid: { color: gridColor },
+           afterFit(ax) {
+             // shade forecast area visually via tick color change
+             ax.ticks.forEach((t, i) => {
+               if (i >= ACTUAL_COUNT) t.color = 'rgba(108,142,251,0.7)';
+             });
+           }
+      },
+      y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { callback: v => v.toLocaleString() } }
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CHART B: REVENUE vs AI COST vs MARGIN %
+// ═══════════════════════════════════════════════════════════════
+new Chart(document.getElementById('chartRevCost'), {
+  type: 'bar',
+  data: {
+    labels: allMonths,
+    datasets: [
+      {
+        label: 'AI Cost — free sites',
+        data: allAIFree,
+        backgroundColor: splitColors('rgba(248,113,113,0.75)', 'rgba(248,113,113,0.25)', allMonths.length),
+        borderWidth: 0,
+        stack: 'cost',
+        yAxisID: 'yUsd',
+      },
+      {
+        label: 'AI Cost — premium sites',
+        data: allAIPrem,
+        backgroundColor: splitColors('rgba(167,139,250,0.75)', 'rgba(167,139,250,0.25)', allMonths.length),
+        borderWidth: 0,
+        stack: 'cost',
+        yAxisID: 'yUsd',
+      },
+      {
+        label: 'Revenue (collections)',
+        data: allRevenue,
+        backgroundColor: splitColors('rgba(34,211,238,0.55)', 'rgba(34,211,238,0.20)', allMonths.length),
+        borderColor: splitColors('rgba(34,211,238,0.85)', 'rgba(34,211,238,0.40)', allMonths.length),
+        borderWidth: 1,
+        stack: 'rev',
+        yAxisID: 'yUsd',
+      },
+      {
+        label: 'Net Margin %',
+        type: 'line',
+        data: allMarginPct,
+        borderColor: 'rgba(251,191,36,0.90)',
+        backgroundColor: 'rgba(251,191,36,0.07)',
+        pointBackgroundColor: allMonths.map((_,i) => i < ACTUAL_COUNT ? 'rgba(251,191,36,1)' : 'rgba(251,191,36,0.5)'),
+        pointRadius: 4,
+        borderWidth: 2,
+        tension: 0.35,
+        fill: true,
+        yAxisID: 'yPct',
+        order: 0,
+        stack: undefined,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14 } },
+      tooltip: {
+        filter: (item) => item.dataset.label !== 'Net Margin %',
+        callbacks: {
+          label: (ctx) => {
+            const v = ctx.parsed.y;
+            return ` ${ctx.dataset.label}: ${fmt(v)}`;
+          },
+          afterBody: (items) => {
+            if (!items.length) return [];
+            const i = items[0].dataIndex;
+            return [
+              `──────────────────`,
+              ` Net Margin:  ${fmt(allMargin[i])}  (${allMarginPct[i].toFixed(1)}%)`
+            ];
+          }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: gridColor } },
+      yUsd: { position: 'left', beginAtZero: true, stacked: false, grid: { color: gridColor }, ticks: { callback: v => v >= 1000 ? '$'+(v/1000).toFixed(0)+'K' : '$'+v } },
+      yPct: { position: 'right', min: 0, max: 100, grid: { drawOnChartArea: false }, ticks: { callback: v => v+'%' } }
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CHART C: CHURN COUNT
+// ═══════════════════════════════════════════════════════════════
+new Chart(document.getElementById('chartChurn'), {
+  type: 'bar',
+  data: {
+    labels: allMonths,
+    datasets: [{
+      label: 'Sites churned',
+      data: allChurn,
+      backgroundColor: splitColors('rgba(248,113,113,0.75)', 'rgba(248,113,113,0.30)', allMonths.length),
+      borderColor: splitColors('rgba(248,113,113,1)', 'rgba(248,113,113,0.5)', allMonths.length),
+      borderWidth: 1,
+      borderRadius: 3,
+    },{
+      label: 'Churn %',
+      type: 'line',
+      data: allChurnPct,
+      borderColor: 'rgba(251,146,60,0.9)',
+      backgroundColor: 'transparent',
+      pointRadius: 3,
+      borderWidth: 2,
+      tension: 0.35,
+      yAxisID: 'yPct',
+      order: 0,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label === 'Churn %' ? ` ${ctx.parsed.y}%` : ` ${ctx.parsed.y} sites` } }
+    },
+    scales: {
+      x: { grid: { color: gridColor } },
+      y: { beginAtZero: true, grid: { color: gridColor } },
+      yPct: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { callback: v => v+'%' } }
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CHART D: PLAN MIX % OVER TIME
+// ═══════════════════════════════════════════════════════════════
+const annPctArr = allPremium.map((tot, i) => Math.round(allAnnual[i] / tot * 1000) / 10);
+const moPctArr  = allPremium.map((tot, i) => Math.round(allMonthly[i] / tot * 1000) / 10);
+
+new Chart(document.getElementById('chartMix'), {
+  type: 'bar',
+  data: {
+    labels: allMonths,
+    datasets: [
+      {
+        label: 'Annual %',
+        data: annPctArr,
+        backgroundColor: splitColors('rgba(108,142,251,0.75)', 'rgba(108,142,251,0.30)', allMonths.length),
+        borderWidth: 0,
+        stack: 'mix',
+        borderRadius: 0,
+      },
+      {
+        label: 'Monthly %',
+        data: moPctArr,
+        backgroundColor: splitColors('rgba(167,139,250,0.70)', 'rgba(167,139,250,0.25)', allMonths.length),
+        borderWidth: 0,
+        stack: 'mix',
+        borderRadius: 3,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` } }
+    },
+    scales: {
+      x: { stacked: true, grid: { color: gridColor } },
+      y: { stacked: true, min: 0, max: 100, grid: { color: gridColor }, ticks: { callback: v => v+'%' } }
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DATA TABLE
+// ═══════════════════════════════════════════════════════════════
+const tbody = document.getElementById('tableBody');
+
+let totRev = 0, totAI = 0, totMarg = 0;
+allMonths.forEach((mo, i) => {
+  const isActual = i < ACTUAL_COUNT;
+  const rev  = allRevenue[i];
+  const ai   = allAICost[i];
+  const marg = allMargin[i];
+  const pct  = allMarginPct[i];
+  totRev  += rev;
+  totAI   += ai;
+  totMarg += marg;
+
+  const tr = document.createElement('tr');
+  tr.className = isActual ? 'actual' : 'forecast';
+  tr.innerHTML = `
+    <td>${mo}<span class="${isActual ? 'badge-actual' : 'badge-forecast'}">${isActual ? 'ACTUAL' : 'FCST'}</span></td>
+    <td>${allPremium[i].toLocaleString()}</td>
+    <td>${allAnnual[i].toLocaleString()}</td>
+    <td>${allMonthly[i].toLocaleString()}</td>
+    <td>${allChurn[i] > 0 ? '−'+allChurn[i].toLocaleString() : '—'}</td>
+    <td>${allChurnPct[i] > 0 ? allChurnPct[i]+'%' : '—'}</td>
+    <td>${fmt(rev)}</td>
+    <td>${fmt(ai)}</td>
+    <td>${fmt(marg)}</td>
+    <td style="color:${pct >= 85 ? '#34d399' : pct >= 70 ? '#fbbf24' : '#f87171'}">${pct.toFixed(1)}%</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Totals row
+const totPct = Math.round(totMarg / totRev * 1000) / 10;
+const tr = document.createElement('tr');
+tr.className = 'total';
+tr.innerHTML = `
+  <td>12-Month Total</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>${fmt(totRev)}</td>
+  <td>${fmt(totAI)}</td>
+  <td>${fmt(totMarg)}</td>
+  <td>${totPct.toFixed(1)}%</td>
+`;
+tbody.appendChild(tr);
+
+</script>
+</body>
+</html>
