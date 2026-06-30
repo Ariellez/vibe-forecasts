@@ -74,8 +74,8 @@ MONTHLY_CHURN_M1        = 0.321      # 32.1% — Monthly converts in their first
 #   Jun 1–2 had legacy high traffic (1,267 + 997); cliff hit Jun 3 (-57% overnight)
 #   Conservative 10K chosen as stable post-cliff baseline (vs earlier 13K WoW extrapolation)
 JUNE_BASELINE           = 10_000
-NEW_SITES_BASE          = round(JUNE_BASELINE * 0.97)   # = 9,700 — July 2026 first forecast month
-MONTHLY_GROWTH_RATE     = -0.03      # -3%/month from July onward
+NEW_SITES_BASE          = round(JUNE_BASELINE * 0.95)   # = 9,500 — July 2026 first forecast month
+MONTHLY_GROWTH_RATE     = -0.05      # -5%/month from July onward (updated 2026-06-30)
 
 # Conversion funnel (Q_FP2: all 12 cohorts Jun 2025–May 2026 = 554,635 sites)
 CONVERSION_RATE         = 0.0332     # 3.32%
