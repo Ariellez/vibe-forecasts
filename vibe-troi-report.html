@@ -478,52 +478,6 @@
 
   <hr>
 
-  <!-- ══ TROI MATRIX ════════════════════════════════════════════════════════ -->
-  <section>
-    <div class="section-label">Segment analysis</div>
-    <h2>TROI Matrix — All 28 Segments</h2>
-    <p class="section-desc">Cost pattern × Premium lifecycle. Revenue assigned by lifecycle (Q_FA rates). AI cost = Mar–May 2026 average. Ordered by margin per site.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-      <div style="background:rgba(63,207,142,0.08);border:1px solid rgba(63,207,142,0.2);border-radius:6px;padding:10px">
-        <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:0.5px">PROFITABLE</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">Revenue &gt; AI cost &gt; 0</div>
-      </div>
-      <div style="background:rgba(91,141,246,0.08);border:1px solid rgba(91,141,246,0.2);border-radius:6px;padding:10px">
-        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.5px">ZERO_COST</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">Revenue &gt; 0, AI cost = $0</div>
-      </div>
-      <div style="background:rgba(242,87,87,0.08);border:1px solid rgba(242,87,87,0.2);border-radius:6px;padding:10px">
-        <div style="font-size:11px;font-weight:700;color:var(--red);letter-spacing:0.5px">NET_LOSS</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">AI cost &gt; 0, revenue = $0</div>
-      </div>
-      <div style="background:rgba(136,146,164,0.08);border:1px solid rgba(136,146,164,0.2);border-radius:6px;padding:10px">
-        <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px">FREE_NO_COST</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">Both = $0. No AI usage.</div>
-      </div>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Signal</th>
-            <th>Cost Pattern</th>
-            <th>Premium Lifecycle</th>
-            <th class="num">Sites</th>
-            <th class="num">Rev/site/mo</th>
-            <th class="num">AI cost/site/mo</th>
-            <th class="num">Margin/site/mo</th>
-            <th class="num">Total monthly impact</th>
-          </tr>
-        </thead>
-        <tbody id="troiBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <hr>
-
   <!-- ══ INSIGHTS ═══════════════════════════════════════════════════════════ -->
   <section>
     <div class="section-label">Key findings</div>
