@@ -769,45 +769,56 @@ new Chart(document.getElementById('chartMarginPct'), {
 });
 
 // ── New sites forecast chart ──────────────────────────────────────────────
+const premConverts = newSites.map(n => Math.round(n * 0.0332));
+const freeSites    = newSites.map((n, i) => n - premConverts[i]);
 new Chart(document.getElementById('chartNewSites'), {
   type: 'bar',
   data: {
     labels: months,
-    datasets: [{
-      label: 'New Vibe sites',
-      data: newSites,
-      backgroundColor: newSites.map((_, i) =>
-        i === 0 ? 'rgba(91,141,246,0.85)' : 'rgba(91,141,246,0.5)'
-      ),
-      borderColor: newSites.map((_, i) =>
-        i === 0 ? 'rgba(91,141,246,1)' : 'rgba(91,141,246,0.7)'
-      ),
-      borderWidth: 1,
-      borderRadius: 4
-    }]
+    datasets: [
+      {
+        label: 'Free sites (no conversion)',
+        data: freeSites,
+        backgroundColor: 'rgba(91,141,246,0.45)',
+        borderColor: 'rgba(91,141,246,0.7)',
+        borderWidth: 1,
+        stack: 'sites'
+      },
+      {
+        label: 'Premium converts (3.32%)',
+        data: premConverts,
+        backgroundColor: 'rgba(63,207,142,0.75)',
+        borderColor: 'rgba(63,207,142,1)',
+        borderWidth: 1,
+        stack: 'sites'
+      }
+    ]
   },
   options: {
     responsive: true,
     plugins: {
-      legend: { display: false },
+      legend: { position: 'top' },
       tooltip: {
+        mode: 'index',
         callbacks: {
-          label: ctx => ' ' + ctx.parsed.y.toLocaleString() + ' new sites',
-          afterLabel: ctx => {
-            const conv = Math.round(ctx.parsed.y * 0.0332);
+          footer: items => {
+            const i    = items[0].dataIndex;
+            const tot  = newSites[i];
+            const conv = premConverts[i];
             const ann  = Math.round(conv * 0.546);
             const mo   = conv - ann;
             return [
-              ' → ' + conv.toLocaleString() + ' converts (3.32%)',
-              '   ' + ann.toLocaleString() + ' annual · ' + mo.toLocaleString() + ' monthly'
+              'Total new sites: ' + tot.toLocaleString(),
+              'Converts: ' + conv + ' → ' + ann + ' annual · ' + mo + ' monthly'
             ];
           }
         }
       }
     },
     scales: {
-      x: { grid: { color: gridColor() } },
+      x: { stacked: true, grid: { color: gridColor() } },
       y: {
+        stacked: true,
         grid: { color: gridColor() },
         ticks: { callback: v => (v/1000).toFixed(1) + 'K' },
         beginAtZero: false,
