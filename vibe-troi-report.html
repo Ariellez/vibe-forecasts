@@ -303,6 +303,13 @@
         <div class="chart-source">Source: T3 — datadoc/111706 cell 697943</div>
       </div>
     </div>
+
+    <div class="chart-wrap" style="margin-top:16px">
+      <div class="chart-title">New Vibe Sites Created per Month — Jul 2026 to Jun 2027 (Forecast)</div>
+      <div class="chart-sub">Starts at 9,700 (10K June post-cliff baseline × 0.97) and declines -3%/month — W7-validated structural headwind. Feeds conversion pipeline: 3.32% → premium, 54.6% → annual plans.</div>
+      <canvas id="chartNewSites" height="110"></canvas>
+      <div class="chart-source">Source: W7 — datadoc/114856 cell 720680 (10K Jun baseline) · Business assumption: -3%/mo decline rate</div>
+    </div>
   </section>
 
 
@@ -749,6 +756,56 @@ new Chart(document.getElementById('chartMarginPct'), {
       x: { grid: { color: gridColor() } },
       y: { grid: { color: gridColor() }, ticks: { callback: v => v + '%' }, min: 30, max: 90 }
       // Range 30–90 covers 37.7% (Jun 2027, tiny renewal cohort) → 78.5% (Jan 2027, peak renewal)
+    }
+  }
+});
+
+// ── New sites forecast chart ──────────────────────────────────────────────
+new Chart(document.getElementById('chartNewSites'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [{
+      label: 'New Vibe sites',
+      data: newSites,
+      backgroundColor: newSites.map((_, i) =>
+        i === 0 ? 'rgba(91,141,246,0.85)' : 'rgba(91,141,246,0.5)'
+      ),
+      borderColor: newSites.map((_, i) =>
+        i === 0 ? 'rgba(91,141,246,1)' : 'rgba(91,141,246,0.7)'
+      ),
+      borderWidth: 1,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ' ' + ctx.parsed.y.toLocaleString() + ' new sites',
+          afterLabel: ctx => {
+            const conv = Math.round(ctx.parsed.y * 0.0332);
+            const ann  = Math.round(conv * 0.546);
+            const mo   = conv - ann;
+            return [
+              ' → ' + conv.toLocaleString() + ' converts (3.32%)',
+              '   ' + ann.toLocaleString() + ' annual · ' + mo.toLocaleString() + ' monthly'
+            ];
+          }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: gridColor() } },
+      y: {
+        grid: { color: gridColor() },
+        ticks: { callback: v => (v/1000).toFixed(1) + 'K' },
+        beginAtZero: false,
+        min: 6000,
+        max: 10500
+      }
     }
   }
 });
