@@ -282,7 +282,7 @@
       <div class="chart-title">New Vibe Sites Created per Month — Jul 2026 to Jun 2027 (Forecast)</div>
       <div class="chart-sub">Starts at 9,500 (10K June post-cliff baseline × 0.95) and declines -5%/month — structural headwind assumption. Feeds conversion pipeline: 3.32% → premium, 54.6% → annual plans.</div>
       <canvas id="chartNewSites" height="110"></canvas>
-      <div class="chart-source">Source: W7 — datadoc/114856 cell 720680 (10K Jun baseline) · Business assumption: -3%/mo decline rate</div>
+      <div class="chart-source">Source: W7 — datadoc/114856 cell 720680 (10K Jun baseline) · Business assumption: -5%/mo decline rate</div>
     </div>
   </section>
 
@@ -807,7 +807,7 @@ new Chart(document.getElementById('chartNewSites'), {
         grid: { color: gridColor() },
         ticks: { callback: v => (v/1000).toFixed(1) + 'K' },
         beginAtZero: false,
-        min: 6000,
+        min: 4500,
         max: 10500
       }
     }
