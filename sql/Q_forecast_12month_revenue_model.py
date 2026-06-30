@@ -1,9 +1,8 @@
-# ── 12-Month Revenue Forecast: Vibe Premium + GPV (Jul 2026 – Jun 2027) ─────
+# ── 12-Month Revenue Forecast: Vibe Premium — Subscription-Only (Jul 2026 – Jun 2027) ─
 # Datadoc: https://bo.wix.com/data-tools/quix/v2/datadoc/111027/?cellId=697721
 #
-# Parameters sourced from actual query results (v9 — Renewal Wave model, 2026-06-29):
-#   Q_FA  (cell 697714): active base & monthly revenue per plan type (Jan-May 2026 avg)
-#   Q_FP1 (cell 697732): new site creation trend — SUPERSEDED by W1 (13K June baseline)
+# Parameters sourced from actual query results (v11 — Subscription-only model, 2026-06-30):
+#   Q_FA  (cell 697714): active base per plan type (Jan-May 2026 avg)
 #   Q_FP2 (cell 697733): conversion rate 3.32% & Annual share 54.6% — ALL 12 cohorts
 #                         Jun 2025-May 2026, 554,635 sites
 #   Q_FP3 (cell 697734): steady-state churn Annual 6.08% / Monthly 17.96% (pooled cohort)
@@ -19,17 +18,17 @@
 #                         → Growing sites (4.7%) PEAK at LM4 ($6.87) then decline — no compounding
 #   W11 (cohort survival validated): Jan 2026 cohort annual plans → 2%/mo mid-cycle churn
 #                         → 12-month survival: M1 (10.9%) × months 2-11 (0.98^11) = 71.3%
+#   Monthly plan subscription price: avg RENEWAL transaction $23.96/site (data-validated, 4,670 sites)
 #
-# Model logic v9 — key change vs v8:
-#   RENEWAL WAVE MODEL: Annual plan revenue ($166/yr subscription) is now recognized as a
-#   lump-sum in each cohort's 12-month renewal month instead of being amortized as $13.83/mo.
-#   MONTHLY_REV_ANNUAL reduced from $21.76 to $7.93 (GPV-only portion: $21.76 − $13.83).
-#   Renewal revenue = surviving_annual_sites × (1 − 15% renewal_churn) × $166.
-#   Survival to renewal uses W11-validated 2%/mo mid-cycle rate (71.3% overall).
-#   Result: revenue flat Jul–Jan ($212–$237K) then drops in Apr–Jun 2027 as post-cliff
-#   cohorts (Apr–Jun 2026, only 332–1,382 converts) renew — exposing the cash-flow cliff.
+# Model logic v11 — key changes vs v10:
+#   SUBSCRIPTION-ONLY: GPV income excluded from forecast (per user request 2026-06-30).
+#   1. MONTHLY_REV_ANNUAL_GPV: $0.66 → $0.00 (annual sites generate no ongoing revenue in
+#      non-renewal months; subscription fee is lump-sum at renewal only)
+#   2. MONTHLY_REV_MONTHLY: $20.38 → $23.96 (actual avg RENEWAL transaction for monthly plans;
+#      data-validated from financial_transactions_vibe_sites, 4,670 sites, median $23.35)
+#   All renewal wave logic unchanged from v10 (Q9-validated $114.71 annual price, 15% churn).
 #
-# Last updated: 2026-06-29 (v9 — Renewal Wave model) | Author: Cursor agent
+# Last updated: 2026-06-30 (v11 — Subscription-only model) | Author: Cursor agent
 # ─────────────────────────────────────────────────────────────────────────────
 
 import pandas as pd
@@ -44,11 +43,15 @@ ACTIVE_MONTHLY          = 3_185      # active Monthly premium sites
 # v9: MONTHLY_REV_ANNUAL split into GPV-only ($7.93) + explicit renewal wave.
 #     $21.76 total = $13.83 amortized subscription ($166/12) + $7.93 GPV.
 #     Annual subscription is now recognized as a lump-sum in the renewal month.
-MONTHLY_REV_ANNUAL      = 0.66       # USD / active Annual site / month (GPV ONLY, Q9 validated)
-                                     # Q9: only 189/9,806 Yearly sites have GPV; avg $34.26 for those
-                                     # → $34.26 × 189 / 9,806 = $0.66/site/month across all Yearly sites
+MONTHLY_REV_ANNUAL      = 0.00       # USD / active Annual site / month (GPV EXCLUDED, v11)
+                                     # Annual sites generate $0 ongoing revenue between renewals;
+                                     # all subscription income arrives as lump-sum at renewal month.
 MONTHLY_REV_ANNUAL_NEW  = 114.71     # USD — new annual converts pay full annual price upfront (Q9)
-MONTHLY_REV_MONTHLY     = 20.38      # USD / active Monthly site / month (Q_FA, unchanged)
+MONTHLY_REV_MONTHLY     = 23.96      # USD / active Monthly site / month (subscription only, v11)
+                                     # Data-validated: avg RENEWAL transaction from
+                                     # financial_transactions_vibe_sites, 4,670 monthly-plan sites,
+                                     # avg $23.96 (median $23.35). Replaces $20.38 Q_FA estimate
+                                     # which blended subscription + GPV.
 ANNUAL_RENEWAL_PRICE    = 114.71     # USD — actual avg annual plan price (Q9: avg CHARGE 5,745 sites)
                                      # Confirmed: Jan 2026 $313K CHARGE / 2,684 sites = $116.71/site
 RENEWAL_CHURN           = 0.15       # 15% of annual sites don't renew at month 12 (user assumption)

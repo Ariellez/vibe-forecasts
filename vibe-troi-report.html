@@ -229,18 +229,19 @@
   <!-- ══ PAGE HEADER ═══════════════════════════════════════════════════════ -->
   <div class="page-header">
     <div style="margin-bottom:10px">
-      <span class="tag">REVENUE MODEL v10</span>
+      <span class="tag">REVENUE MODEL v11</span>
       <span class="tag">10K DAILY BASELINE</span>
       <span class="tag">-3%/mo FROM JULY</span>
       <span class="tag">TWO-PHASE CHURN</span>
       <span class="tag">SPIKE+TAIL AI COST</span>
       <span class="tag">W9 PREM AI COST</span>
       <span class="tag">RENEWAL WAVES · 15% CHURN</span>
+      <span class="tag">SUBSCRIPTION-ONLY · NO GPV</span>
       <span class="tag">JUL 2026 – JUN 2027</span>
     </div>
     <h1>Wix Vibe — TROI Analysis</h1>
     <p>Revenue vs AI cost by segment (cost pattern × premium lifecycle). All parameters data-driven from Quix queries.
-      Sources: datadoc/111706 · datadoc/111027 · datadoc/109618 · datadoc/114856 (W5 multi-cohort + W7 daily Jun + W9 premium AI patterns + W11 cohort survival) — Last updated 2026-06-29 (v9 — renewal waves)</p>
+      Sources: datadoc/111706 · datadoc/111027 · datadoc/109618 · datadoc/114856 (W5 multi-cohort + W7 daily Jun + W9 premium AI patterns + W11 cohort survival) — Last updated 2026-06-30 (v11 — subscription-only, no GPV)</p>
   </div>
 
   <!-- ══ KPI STRIP ═════════════════════════════════════════════════════════ -->
@@ -255,7 +256,7 @@
         <div class="kpi-label">Starting premium sites (BOM Jul 2026)</div>
       </div>
       <div class="kpi">
-        <div class="kpi-value">~$87K/mo avg</div>
+        <div class="kpi-value">~$90K/mo avg</div>
         <div class="kpi-label">Avg monthly net margin per forecast month</div>
       </div>
     </div>
@@ -279,11 +280,11 @@
   <section>
     <div class="section-label">Forward projection</div>
     <h2>12-Month Revenue, AI Cost &amp; Net Margin</h2>
-    <p class="section-desc">Revenue model v9: adds <strong>annual renewal waves</strong> — each cohort's annual plans generate a lump-sum $166 payment at month 12, with 15% renewal churn applied. Mid-cycle survival uses W11-validated 2%/mo (71.3% survive to renewal). Result: revenue is <strong>relatively flat Jul–Jan ($212–$237K)</strong> as renewal waves offset GPV base erosion, then <strong>drops sharply in Apr–Jun 2027</strong> when post-traffic-cliff cohorts (Apr–Jun 2026) renew with tiny bases. Renewal waves are 56.7% of 12-month revenue.</p>
+    <p class="section-desc">Revenue model v11: <strong>subscription-only</strong> — GPV income excluded. Revenue = monthly plan subscriptions ($23.96/site/mo, data-validated) + annual renewal waves ($114.71 lump-sum at month 12, 15% renewal churn, 71.3% mid-cycle survival). Annual sites contribute <strong>$0 between renewals</strong>. Result: revenue is <strong>relatively flat Jul–Jan ($142–$155K)</strong> driven by renewal waves from large cohorts, then <strong>drops sharply in Apr–Jun 2027</strong> when post-traffic-cliff cohorts (Apr–Jun 2026) renew with tiny bases. Renewal waves are 59.7% of 12-month revenue.</p>
 
     <div class="chart-wrap">
       <div class="chart-title">Monthly Revenue vs AI Cost vs Net Margin — Jul 2026 to Jun 2027</div>
-      <div class="chart-sub">Revenue (green) · AI Cost (red) · Net Margin (blue). Revenue spikes reflect annual plan renewal waves — largest cohorts renew Nov–Jan, smallest in Apr–Jun 2027.</div>
+      <div class="chart-sub">Revenue (green) · AI Cost (red) · Net Margin (blue). Subscription-only model — GPV excluded. Revenue spikes reflect annual plan renewal waves — largest cohorts renew Nov–Jan, smallest in Apr–Jun 2027.</div>
       <canvas id="chartForward" height="110"></canvas>
       <div class="chart-source">Source: datadoc/111027 cell 697721 (v8 model) · datadoc/114856 W5 (free AI spike+tail) · W9 cell 725342 (premium AI LM rates)</div>
     </div>
@@ -291,13 +292,13 @@
     <div class="two-col">
       <div class="chart-wrap">
         <div class="chart-title">AI Cost Split: Premium vs Free Sites</div>
-        <div class="chart-sub">Premium cost declines $22K → $14K (W9 validated: LM spike then tail). Free cost declines $29K → $12K (large historical cohorts age out fast).</div>
+        <div class="chart-sub">Premium cost declines $22K → $14K (W9 validated: LM spike then tail). Free cost declines $29K → $12K (large historical cohorts age out fast). AI costs unchanged from v10 — subscription-only affects revenue only.</div>
         <canvas id="chartCostSplit" height="180"></canvas>
         <div class="chart-source">Source: datadoc/114856 W5 cell 719239 (spike+tail LM rates × historical cohort sizes)</div>
       </div>
       <div class="chart-wrap">
         <div class="chart-title">Net Margin % by Month</div>
-        <div class="chart-sub">Rises 76.3% → 86.0% (Jul–Jan) as large cohorts renew; drops to 65.6% in Jun 2027 when only 110 sites renew (Jun 2026 was a tiny cliff-cohort of 332 converts).</div>
+        <div class="chart-sub">Rises 66.2% → 78.5% (Jul–Jan) as large cohorts renew; drops to 37.7% in Jun 2027 when only 110 sites renew (Jun 2026 was a tiny cliff-cohort of 332 converts).</div>
         <canvas id="chartMarginPct" height="180"></canvas>
         <div class="chart-source">Source: T3 — datadoc/111706 cell 697943</div>
       </div>
@@ -311,57 +312,57 @@
   <section>
     <div class="section-label">Step-by-step</div>
     <h2>July 2026 — How Revenue &amp; Cost Are Built</h2>
-    <p class="section-desc">Complete derivation from raw parameters to the $214,630 revenue and $50,927 AI cost figures (v9 — 10K baseline, two-phase churn + spike+tail free AI + W9 premium LM model + renewal waves).</p>
+    <p class="section-desc">Complete derivation from raw parameters to the $150,766 revenue and $50,927 AI cost figures (v11 — 10K baseline, two-phase churn + spike+tail free AI + W9 premium LM model + renewal waves, subscription-only, no GPV).</p>
 
     <div class="walkthrough">
 
       <!-- Revenue side -->
       <div>
         <div class="wk-card">
-          <h3>Revenue Source 1 — GPV <span class="val g">$120,063</span></h3>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Ongoing GPV revenue from the existing active premium base (BOM). Annual plan subscription fees are NOT included here — they appear as a lump sum at renewal (Source 2).</p>
+          <h3>Revenue Source 1 — Subscription Base <span class="val g">$76,313</span></h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Ongoing subscription revenue from the existing active premium base (BOM). GPV income excluded (v11). Annual plan subscription fees are NOT included here — they appear as a lump sum at renewal (Source 2).</p>
           <div class="wk-row"><span class="label">Active Annual sites (BOM)</span><span class="val b">6,955</span></div>
-          <div class="wk-row"><span class="label">× GPV rev per Annual site/month</span><span class="val">$7.93</span></div>
-          <div class="wk-row"><span class="label">= Annual GPV revenue</span><span class="val g">$55,153</span></div>
+          <div class="wk-row"><span class="label">× Subscription rev per Annual site/month</span><span class="val">$0.00</span></div>
+          <div class="wk-row"><span class="label">= Annual base revenue</span><span class="val g">$0</span></div>
           <div class="wk-row" style="margin-top:8px"><span class="label">Active Monthly sites (BOM)</span><span class="val b">3,185</span></div>
-          <div class="wk-row"><span class="label">× Rev per Monthly site/month</span><span class="val">$20.38</span></div>
-          <div class="wk-row"><span class="label">= Monthly base revenue</span><span class="val g">$64,910</span></div>
-          <div class="wk-total"><span>Stream 1 total</span><span style="color:var(--green)">$120,063</span></div>
-          <div class="wk-note">$7.93 = $21.76 total (Q_FA) − $13.83 (amortized annual sub $166÷12). Annual sites contribute <strong>GPV only</strong> in non-renewal months. Subscription fee is recognized as a lump sum in the renewal month.</div>
+          <div class="wk-row"><span class="label">× Subscription rev per Monthly site/month</span><span class="val">$23.96</span></div>
+          <div class="wk-row"><span class="label">= Monthly subscription revenue</span><span class="val g">$76,313</span></div>
+          <div class="wk-total"><span>Stream 1 total</span><span style="color:var(--green)">$76,313</span></div>
+          <div class="wk-note">$23.96 = data-validated avg RENEWAL transaction from financial_transactions_vibe_sites (4,670 monthly-plan sites; median $23.35). GPV income ($0.66/annual site/month, $XX/monthly site) excluded from the forecast — this model focuses on packages, domain, SEO, and other subscription products only. Annual sites contribute <strong>$0 ongoing revenue</strong> in non-renewal months.</div>
         </div>
 
         <div class="wk-card" style="margin-top:14px">
-          <h3>Revenue Source 2 — Renewal Wave <span class="val g">$91,300</span></h3>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Annual plan renewals — the Jul 2025 cohort hits its 12-month anniversary in July 2026. Sites that renew pay $166 upfront.</p>
+          <h3>Revenue Source 2 — Renewal Wave <span class="val g">$63,090</span></h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Annual plan renewals — the Jul 2025 cohort hits its 12-month anniversary in July 2026. Sites that renew pay $114.71 upfront (Q9-validated avg annual plan price).</p>
           <div class="wk-row"><span class="label">Jul 2025 original annual converts</span><span class="val b">906</span></div>
           <div class="wk-row"><span class="label">× 12-month survival rate (W11: 2%/mo)</span><span class="val">71.3%</span></div>
           <div class="wk-row"><span class="label">= Annual sites surviving to renewal</span><span class="val b">646</span></div>
           <div class="wk-row" style="margin-top:8px"><span class="label">× Renewal rate (1 − 15% churn)</span><span class="val">85%</span></div>
           <div class="wk-row"><span class="label">= Sites that renew</span><span class="val b">550</span></div>
-          <div class="wk-row" style="margin-top:8px"><span class="label">550 × $166 annual price</span><span class="val g">$91,300</span></div>
-          <div class="wk-total"><span>Stream 2 total</span><span style="color:var(--green)">$91,300</span></div>
+          <div class="wk-row" style="margin-top:8px"><span class="label">550 × $114.71 annual price (Q9)</span><span class="val g">$63,090</span></div>
+          <div class="wk-total"><span>Stream 2 total</span><span style="color:var(--green)">$63,090</span></div>
           <div class="wk-note">Renewal wave grows month-over-month (Jul–Jan) as larger cohorts hit their anniversary. The Nov 2025–Jan 2026 cohorts are the largest (~2,490–2,776 converts each) → peaks in Nov–Jan. Then drops in Apr–Jun 2027 as post-cliff cohorts renew.</div>
         </div>
 
         <div class="wk-card" style="margin-top:14px">
-          <h3>Revenue Source 3 — New Converts <span class="val g">$3,267</span></h3>
+          <h3>Revenue Source 3 — New Converts <span class="val g">$11,363</span></h3>
           <p style="font-size:12px;color:var(--muted);margin-bottom:14px">New Day-0 converts — sites created <em>in July</em> that converted to premium AND activated on Day 0</p>
           <div class="wk-row"><span class="label">New Vibe sites created in July</span><span class="val b">9,700</span></div>
           <div class="wk-row"><span class="label">× conversion rate (Q_FP2)</span><span class="val">3.32%</span></div>
           <div class="wk-row"><span class="label">= new premium converts</span><span class="val b">322</span></div>
-          <div class="wk-row" style="margin-top:8px"><span class="label">× Day-0 share × $21.76 / $20.38</span><span class="val"></span></div>
-          <div class="wk-row"><span class="label">84 annual × $21.76 + 70 monthly × $20.38</span><span class="val g">$3,267</span></div>
-          <div class="wk-total"><span>Stream 3 total</span><span style="color:var(--green)">$3,267</span></div>
-          <div class="wk-note">New converts use $21.76 (full rate) for their first month since they just paid their annual/monthly fee. Only 1.5% of July revenue — the existing base and renewal waves dominate.</div>
+          <div class="wk-row" style="margin-top:8px"><span class="label">× Day-0 share (48%) × annual/monthly split</span><span class="val"></span></div>
+          <div class="wk-row"><span class="label">84 annual × $114.71 + 70 monthly × $23.96</span><span class="val g">$11,363</span></div>
+          <div class="wk-total"><span>Stream 3 total</span><span style="color:var(--green)">$11,363</span></div>
+          <div class="wk-note">New annual converts pay $114.71 upfront on Day 0; new monthly converts pay $23.96 for their first month. Only 7.5% of July revenue — the monthly subscription base and renewal waves dominate.</div>
         </div>
 
         <div class="wk-card" style="margin-top:14px;background:rgba(63,207,142,0.05);border-color:rgba(63,207,142,0.25)">
-          <h3>July 2026 Total Revenue <span class="val g">$214,630</span></h3>
-          <div class="wk-row"><span class="label">GPV base (annual + monthly)</span><span class="val g">$120,063</span></div>
-          <div class="wk-row"><span class="label">+ Renewal wave (Jul 2025 cohort)</span><span class="val g">$91,300</span></div>
-          <div class="wk-row"><span class="label">+ Day-0 new converts</span><span class="val g">$3,267</span></div>
-          <div class="wk-total"><span>= July Revenue</span><span style="color:var(--green)">$214,630</span></div>
-          <div class="wk-note" style="margin-top:12px">End-of-month base: 6,708 annual + 2,759 monthly = <strong>9,467 sites</strong>.<br>⚠️ Net change: +322 new converts − 995 churned = <strong>−673 net premium sites</strong>. The base shrinks every month but renewal waves keep revenue stable through January.</div>
+          <h3>July 2026 Total Revenue <span class="val g">$150,766</span></h3>
+          <div class="wk-row"><span class="label">Subscription base (monthly 3,185 × $23.96)</span><span class="val g">$76,313</span></div>
+          <div class="wk-row"><span class="label">+ Renewal wave (Jul 2025 cohort, 550 × $114.71)</span><span class="val g">$63,090</span></div>
+          <div class="wk-row"><span class="label">+ Day-0 new converts (84 ann × $114.71 + 70 mo × $23.96)</span><span class="val g">$11,363</span></div>
+          <div class="wk-total"><span>= July Revenue</span><span style="color:var(--green)">$150,766</span></div>
+          <div class="wk-note" style="margin-top:12px">End-of-month base: 6,708 annual + 2,759 monthly = <strong>9,467 sites</strong>.<br>⚠️ Net change: +322 new converts − 995 churned = <strong>−673 net premium sites</strong>. The base shrinks every month but renewal waves keep revenue relatively stable through January.</div>
         </div>
       </div>
 
@@ -414,20 +415,20 @@
 
     <!-- July summary -->
     <div class="wk-summary">
-      <h3 style="margin-bottom:4px">July 2026 — Net Result (v9)</h3>
-      <p style="font-size:12px;color:var(--muted)">Revenue $214,630 − AI Cost $50,927 = Net Margin $163,703 (76.3%). Renewal wave ($91,300) is 42.5% of total revenue. Margin rises steadily through Jan 2027 (86.0%) as larger cohorts renew, then drops in Apr–Jun 2027 when post-cliff cohorts renew.</p>
+      <h3 style="margin-bottom:4px">July 2026 — Net Result (v11)</h3>
+      <p style="font-size:12px;color:var(--muted)">Revenue $150,766 − AI Cost $50,927 = Net Margin $99,839 (66.2%). Renewal wave ($63,090) is 41.9% of total revenue. Margin rises through Jan 2027 (78.5%) as larger cohorts renew, then drops in Apr–Jun 2027 when post-cliff cohorts renew.</p>
       <div class="wk-summary-row">
         <div class="wk-box">
-          <div class="big" style="color:var(--green)">$214,630</div>
-          <div class="small">Revenue<br>GPV $120K + Renewal $91K + New $3K</div>
+          <div class="big" style="color:var(--green)">$150,766</div>
+          <div class="small">Revenue<br>Monthly subs $76K + Renewal $63K + New $11K</div>
         </div>
         <div class="wk-box">
           <div class="big" style="color:var(--red)">$50,927</div>
           <div class="small">AI Cost<br>56% from free sites (LM1 spike + tails)</div>
         </div>
         <div class="wk-box">
-          <div class="big" style="color:var(--accent)">$163,703</div>
-          <div class="small">Net Margin<br>76.3% in Jul → peaks 86% in Jan 2027</div>
+          <div class="big" style="color:var(--accent)">$99,839</div>
+          <div class="small">Net Margin<br>66.2% in Jul → peaks 78.5% in Jan 2027</div>
         </div>
       </div>
     </div>
@@ -517,16 +518,16 @@
       <strong>All active premium segments remain profitable.</strong> Every active premium site covers its AI cost regardless of cost pattern. The worst case is steady + active_monthly: $11.69 AI cost vs $20.38 revenue → +$8.69 margin (1.74× TROI). The best is no_ai_cost + active_annual: pure $21.76/mo revenue. This hasn't changed — the premium TROI matrix is solid.
     </div>
     <div class="callout callout-o">
-      <strong>Renewal waves are 56.7% of 12-month revenue ($1.30M of $2.30M).</strong> Revenue is NOT in simple decline — it stays relatively flat Jul–Jan ($212–$237K) because renewal waves offset GPV base erosion. The model now correctly captures lump-sum $166 payments at each cohort's 12-month anniversary, with 15% renewal churn applied. Renewal wave size grows Jul→Jan as larger cohorts hit their anniversary, peaking with the Nov–Jan 2025/26 cohorts (~2,490–2,776 converts each).
+      <strong>Renewal waves are 59.7% of 12-month revenue ($900K of $1.51M).</strong> Revenue is NOT in simple decline — it stays relatively flat Jul–Jan ($142–$155K) because renewal waves offset the shrinking monthly subscription base. The model captures lump-sum $114.71 payments at each cohort's 12-month anniversary, with 15% renewal churn applied. Renewal wave size grows Jul→Jan as larger cohorts hit their anniversary, peaking with the Nov–Jan 2025/26 cohorts (~2,490–2,776 converts each).
     </div>
     <div class="callout callout-r">
-      <strong>Revenue cliff in Apr–Jun 2027: drops to $133K → $76K.</strong> The post-traffic-cliff cohorts from April–June 2026 had tiny conversion volumes (1,267 → 332 annual converts). When these cohorts renew one year later, they generate minimal renewal revenue. Apr 2027: 419 renewing sites × $166 = $70K. Jun 2027: only 110 renewing sites × $166 = $18K. This is the delayed impact of the May–Jun 2026 traffic cliff becoming visible 12 months later.
+      <strong>Revenue cliff in Apr–Jun 2027: drops to $82K → $42K.</strong> The post-traffic-cliff cohorts from April–June 2026 had tiny conversion volumes (1,267 → 332 annual converts). When these cohorts renew one year later, they generate minimal renewal revenue. Apr 2027: 420 renewing sites × $114.71 = $48K. Jun 2027: only 110 renewing sites × $114.71 = $13K. This is the delayed impact of the May–Jun 2026 traffic cliff becoming visible 12 months later.
     </div>
     <div class="callout callout-g">
       <strong>Premium AI cost is STABLE/DECLINING: $22K (Jul 2026) → $14K (Jun 2027), -36% over 12 months.</strong> W9 disproved the "growing pattern compounds" assumption. Of 3,306 January 2026 premium sites: 50% are "spike_only" (high LM1, then ~$0), 28% are "early_only" (gone after LM2), 14% are declining, and only 4.7% grow — and even those peak at LM4 ($6.87/site) and decline to $5.18 by LM6. The previously projected $57K/month by Jun 2027 was wrong.
     </div>
     <div class="callout callout-b">
-      <strong>12-month net margin: ~$1.87M on $2.30M revenue (81.4% avg) — profitable throughout.</strong> Jul 2026: 76.3% margin. Peaks at 86.0% in Jan 2027 (largest renewal month). Drops to 65.6% in Jun 2027 (tiny renewal cohort). The renewal wave model reveals a more accurate — and more volatile — cash flow picture than the old amortized model. Key risk: the Apr–Jun 2027 revenue cliff is real and structural.
+      <strong>12-month net margin: ~$1.08M on $1.51M revenue (71.6% avg) — profitable throughout.</strong> Jul 2026: 66.2% margin. Peaks at 78.5% in Jan 2027 (largest renewal month). Drops to 37.7% in Jun 2027 (tiny renewal cohort). The subscription-only model gives a conservative, accurate picture: no GPV take included. Key risk: the Apr–Jun 2027 revenue cliff is real and structural.
     </div>
   </section>
 
@@ -600,12 +601,12 @@
         <tbody>
           <tr><td>Active annual sites (BOM Jul 2026)</td><td class="num mono">6,955</td><td>Q_FA — cell 697714</td><td>Jan–May 2026 avg active annual premium sites</td></tr>
           <tr><td>Active monthly sites (BOM Jul 2026)</td><td class="num mono">3,185</td><td>Q_FA — cell 697714</td><td>Jan–May 2026 avg active monthly premium sites</td></tr>
-          <tr><td>Rev per annual site/month (GPV only)</td><td class="num mono">$7.93</td><td>Q_FA derived (v9)</td><td>$21.76 total (Q_FA) − $13.83 amortized subscription ($166 ÷ 12). Annual sites contribute GPV only in non-renewal months.</td></tr>
+          <tr><td>Rev per annual site/month (non-renewal)</td><td class="num mono">$0.00</td><td>v11 — subscription-only model</td><td>Annual sites generate $0 ongoing revenue between renewals. All subscription income ($114.71) arrives as a lump-sum in the renewal month. GPV income excluded per v11 model.</td></tr>
           <tr><td>Annual plan subscription price</td><td class="num mono">$114.71</td><td>Q9 — actual avg CHARGE (5,745 sites)</td><td>Measured from sandbox.ariellez.financial_transactions_vibe_sites. Avg CHARGE for Yearly plan sites Jul 2025+. Median $103.54. Confirmed by Jan 2026: $313K / 2,684 sites = $116.71/site. Replaces $166 business assumption.</td></tr>
-          <tr><td>Ongoing GPV per annual site/month</td><td class="num mono">$0.66</td><td>Q9 — actual GPV take (189 sites)</td><td>Only 189 of 9,806 Yearly plan sites have any GPV activity. Avg $34.26 for those; spread across all = $0.66/site/month. Replaces $7.93 derived estimate.</td></tr>
+          <tr><td>GPV income</td><td class="num mono">$0 (excluded)</td><td>v11 — user decision 2026-06-30</td><td>GPV (2.9% payment processing take) excluded from forecast. Actual GPV: $0.66/annual site/month (189 of 9,806 Yearly sites; Q9). Forecast focuses on packages, domain, SEO, and other subscription products only.</td></tr>
           <tr><td>Annual renewal churn</td><td class="num mono">15%</td><td>User assumption (v9, unchanged)</td><td>Applied at the 12-month renewal date for each cohort. 85% of surviving annual sites renew. No actual renewal data exists yet — first renewals happening Jul 2026.</td></tr>
           <tr><td>Annual mid-cycle survival (months 2–12)</td><td class="num mono">71.3%</td><td>W11 validated (2%/mo)</td><td>M1 churn 10.9% → 89.1% survive M1. Then 2%/mo for 11 months (W11 Jan 2026 cohort: 1,422→1,143 actual) = 0.98^11 = 80.0%. Overall: 0.891 × 0.800 = 71.3%.</td></tr>
-          <tr><td>Rev per monthly site/month</td><td class="num mono">$20.38</td><td>Q_FA — cell 697714</td><td>Net collections + GPV (2.9% take) / active monthly site, Jan–May 2026 avg</td></tr>
+          <tr><td>Rev per monthly site/month (subscription)</td><td class="num mono">$23.96</td><td>financial_transactions_vibe_sites — RENEWAL avg (4,670 sites)</td><td>Data-validated avg RENEWAL transaction for Monthly plan Vibe sites (Jul 2025+). Median $23.35. Replaces Q_FA $20.38 which blended subscription + GPV. GPV excluded in v11.</td></tr>
           <tr><td>June 2026 new sites baseline</td><td class="num mono">10,000</td><td>W7 — datadoc/114856 cell 720680</td><td>Daily data Jun 1–25: post-cliff avg (Jun 3–25) ≈ 370/day → ~10K/month run rate. Jun 3 was cliff day (-57% overnight from Jun 2).</td></tr>
           <tr><td>New Vibe sites/month (July, model start)</td><td class="num mono">9,700</td><td>Computed from W7</td><td>June baseline × 0.97 — first month with -3% applied</td></tr>
           <tr><td>Monthly decline rate (new sites)</td><td class="num mono">-3%/mo</td><td>Business assumption v5</td><td>Stable structural headwind (no marketing budget, fewer entry points). Updated 2026-06-24 from WoW data.</td></tr>
@@ -629,24 +630,23 @@
   </section>
 
   <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:20px">
-    Wix Vibe TROI Analysis · datadoc/111706 · Revenue model v10 (10K daily baseline, two-phase churn + spike+tail AI + renewal waves, Q9 data-validated pricing $114.71, W5+W7+W9+W11) · Updated 2026-06-29
+    Wix Vibe TROI Analysis · datadoc/111706 · Revenue model v11 (10K daily baseline, two-phase churn + spike+tail AI + renewal waves, subscription-only no GPV, monthly $23.96 data-validated, W5+W7+W9+W11) · Updated 2026-06-30
   </div>
 
 </div>
 
 <script>
-// ── Data (v9 — Renewal Wave model, 2026-06-29) ────────────────────────────
-// Revenue model: Python Q_forecast_12month_revenue_model.py v10 — Data-validated pricing
-// Key changes from v9 (Q9 query results, 2026-06-29):
-//   1. Annual plan price: $166 → $114.71 (Q9 actual avg CHARGE; confirmed $116.71/site Jan 2026)
-//   2. Ongoing GPV per annual site/month: $7.93 → $0.66 (Q9: only 189/9,806 Yearly sites have GPV)
-//   3. Day-0 new annual converts: pay $114.71 upfront (was $21.76 amortized estimate)
-//   4. Renewal churn: 15% (unchanged); survival to renewal: 71.3% (W11, unchanged)
-// Result: 12-month revenue $1.48M (vs $2.30M in v9); avg margin 71% (vs 81% in v9)
+// ── Data (v11 — Subscription-only model, 2026-06-30) ─────────────────────
+// Revenue model: Python Q_forecast_12month_revenue_model.py v11
+// Key changes from v10 (2026-06-30):
+//   1. GPV income excluded from forecast — subscription packages only (no 2.9% GPV take)
+//   2. Annual ongoing monthly revenue: $0.66 → $0.00 (annual sites earn $0 between renewals)
+//   3. Monthly plan subscription rate: $20.38 → $23.96 (actual avg RENEWAL transaction, 4,670 sites)
+// Result: 12-month revenue $1.51M (vs $1.48M in v10); avg margin 71.6%
 const months     = ["Jul '26","Aug '26","Sep '26","Oct '26","Nov '26","Dec '26","Jan '27","Feb '27","Mar '27","Apr '27","May '27","Jun '27"];
 const newSites   = [9700,9409,9127,8853,8587,8330,8080,7837,7602,7374,7153,6938];
 const activeBOM  = [10140,9467,8847,8301,7816,7384,6995,6645,6326,6034,5766,5519];
-const revenue    = [143703,140837,139031,138536,145318,146797,153371,136349,127285,81013,83149,41295];
+const revenue    = [150766,146532,143539,142081,148080,148924,154984,137546,128149,81609,83531,41505];
 // Renewal wave: lump-sum $114.71 × renewing sites (15% churn applied at renewal)
 const revRenewal = [63090,69400,75709,82018,94521,100830,111498,97962,91883,48178,52537,12618];
 const revGPV     = months.map((_,i) => revenue[i] - revRenewal[i]);
@@ -748,7 +748,7 @@ new Chart(document.getElementById('chartMarginPct'), {
     scales: {
       x: { grid: { color: gridColor() } },
       y: { grid: { color: gridColor() }, ticks: { callback: v => v + '%' }, min: 30, max: 90 }
-      // Range 30–90 covers 37.4% (Jun 2027, tiny renewal cohort) → 78.3% (Jan 2027, peak renewal)
+      // Range 30–90 covers 37.7% (Jun 2027, tiny renewal cohort) → 78.5% (Jan 2027, peak renewal)
     }
   }
 });
